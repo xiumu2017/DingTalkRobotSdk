@@ -1,45 +1,32 @@
 package chatbot;
 
 import com.alibaba.fastjson.JSON;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by dustin on 2017/3/17.
+ * 发送结果
+ *
+ * @author dustin
+ * @date 2017/3/17
  */
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SendResult {
     private boolean isSuccess;
     private Integer errorCode;
     private String errorMsg;
 
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-    public void setIsSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
-    }
-
-    public Integer getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
     @Override
-    public String toString(){
-        Map<String, Object> items = new HashMap<>();
+    public String toString() {
+        Map<String, Object> items = new HashMap<>(3);
         items.put("errorCode", errorCode);
         items.put("errorMsg", errorMsg);
         items.put("isSuccess", isSuccess);

@@ -1,6 +1,8 @@
 package chatbot.message;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -10,69 +12,40 @@ import java.util.Map;
 
 
 /**
- * Created by dustin on 2017/3/17.
+ * @author dustin
+ * @date 2017/3/17
  */
+@Getter
+@Setter
 public class ActionCardMessage implements Message {
+    /**
+     * 最大按钮数量
+     */
     public static final int MAX_ACTION_BUTTON_CNT = 5;
+    /**
+     * 最小按钮数量
+     */
     public static final int MIN_ACTION_BUTTON_CNT = 1;
 
+    /**
+     * 标题
+     */
     private String title;
-    private String bannerURL;
+    /**
+     * 跳转路径
+     */
+    private String bannerUrl;
     private String briefTitle;
     private String briefText;
     private boolean hideAvatar;
     private ActionButtonStyle actionButtonStyle = ActionButtonStyle.VERTICAL;
-    private List<ActionCardAction> actions = new ArrayList<ActionCardAction>();
+    private final List<ActionCardAction> actions = new ArrayList<>();
 
-    public boolean isHideAvatar() {
-        return hideAvatar;
-    }
-
-    public void setHideAvatar(boolean hideAvatar) {
-        this.hideAvatar = hideAvatar;
-    }
-
-    public String getBriefTitle() {
-        return briefTitle;
-    }
-
-    public void setBriefTitle(String briefTitle) {
-        this.briefTitle = briefTitle;
-    }
-
-    public ActionButtonStyle getActionButtonStyle() {
-        return actionButtonStyle;
-    }
-
-    public void setActionButtonStyle(ActionButtonStyle actionButtonStyle) {
-        this.actionButtonStyle = actionButtonStyle;
-    }
-
-    public String getBannerURL() {
-        return bannerURL;
-    }
-
-    public void setBannerURL(String bannerURL) {
-        this.bannerURL = bannerURL;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBriefText() {
-        return briefText;
-    }
-
-    public void setBriefText(String briefText) {
-        this.briefText = briefText;
-    }
-
-
+    /**
+     * 添加按钮
+     *
+     * @param action {@link ActionCardAction}
+     */
     public void addAction(ActionCardAction action) {
         if (actions.size() >= MAX_ACTION_BUTTON_CNT) {
             throw new IllegalArgumentException("number of actions can't more than " + MAX_ACTION_BUTTON_CNT);
@@ -83,15 +56,15 @@ public class ActionCardMessage implements Message {
     @Override
     public String toJsonString() {
 
-        Map<String, Object> items = new HashMap<String, Object>();
+        Map<String, Object> items = new HashMap<>();
         items.put("msgtype", "actionCard");
 
-        Map<String, Object> actionCardContent = new HashMap<String, Object>();
+        Map<String, Object> actionCardContent = new HashMap<>();
         actionCardContent.put("title", title);
 
         StringBuilder text = new StringBuilder();
-        if (StringUtils.isNotBlank(bannerURL)) {
-            text.append(MarkdownMessage.getImageText(bannerURL)).append("\n");
+        if (StringUtils.isNotBlank(bannerUrl)) {
+            text.append(MarkdownMessage.getImageText(bannerUrl)).append("\n");
         }
         if (StringUtils.isNotBlank(briefTitle)) {
             text.append(MarkdownMessage.getHeaderText(3, briefTitle)).append("\n");

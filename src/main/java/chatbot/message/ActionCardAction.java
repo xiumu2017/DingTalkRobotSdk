@@ -1,30 +1,18 @@
 package chatbot.message;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by dustin on 2017/3/19.
+ * @author dustin
+ * @date 2017/3/19
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class ActionCardAction {
     private String title;
-    private String actionURL;
+    private String actionUrl;
 
-    public ActionCardAction(String text, String actionURL) {
-        this.title = text;
-        this.actionURL = actionURL;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getActionURL() {
-        return actionURL;
-    }
-
-    public void setActionURL(String actionURL) {
-        this.actionURL = actionURL;
-    }
 }

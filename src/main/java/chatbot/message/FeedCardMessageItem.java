@@ -1,34 +1,18 @@
 package chatbot.message;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by dustin on 2017/3/19.
+ * @author dustin
+ * @date 2017/3/19
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class FeedCardMessageItem {
     private String title;
-    private String picURL;
-    private String messageURL;
-
-    public String getMessageURL() {
-        return messageURL;
-    }
-
-    public void setMessageURL(String messageURL) {
-        this.messageURL = messageURL;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPicURL() {
-        return picURL;
-    }
-
-    public void setPicURL(String picURL) {
-        this.picURL = picURL;
-    }
+    private String picUrl;
+    private String messageUrl;
 }

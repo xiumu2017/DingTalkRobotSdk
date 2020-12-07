@@ -1,6 +1,8 @@
 package chatbot.message;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,21 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by dustin on 2017/3/18.
+ * markdown message
+ *
+ * @author dustin
+ * @date 2017/3/18
  */
 public class MarkdownMessage implements Message {
 
+    @Getter
+    @Setter
     private String title;
 
-    private List<String> items = new ArrayList<String>();
+    private final List<String> items = new ArrayList<>();
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public void add(String text) {
         items.add(text);
@@ -49,7 +49,7 @@ public class MarkdownMessage implements Message {
             throw new IllegalArgumentException("headerType should be in [1, 6]");
         }
 
-        StringBuffer numbers = new StringBuffer();
+        StringBuilder numbers = new StringBuilder();
         for (int i = 0; i < headerType; i++) {
             numbers.append("#");
         }
@@ -64,39 +64,37 @@ public class MarkdownMessage implements Message {
         if (orderItem.isEmpty()) {
             return "";
         }
-
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= orderItem.size() - 1; i++) {
-            sb.append(String.valueOf(i) + ". " + orderItem.get(i - 1) + "\n");
+            sb.append(i).append(". ").append(orderItem.get(i - 1)).append("\n");
         }
-        sb.append(String.valueOf(orderItem.size()) + ". " + orderItem.get(orderItem.size() - 1));
+        sb.append(orderItem.size()).append(". ").append(orderItem.get(orderItem.size() - 1));
         return sb.toString();
     }
 
-    public static String getUnorderListText(List<String> unorderItem) {
-        if (unorderItem.isEmpty()) {
+    public static String getUnOrderListText(List<String> unOrderItem) {
+        if (unOrderItem.isEmpty()) {
             return "";
         }
-
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < unorderItem.size() - 1; i++) {
-            sb.append("- " + unorderItem.get(i) + "\n");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < unOrderItem.size() - 1; i++) {
+            sb.append("- ").append(unOrderItem.get(i)).append("\n");
         }
-        sb.append("- " + unorderItem.get(unorderItem.size() - 1));
+        sb.append("- ").append(unOrderItem.get(unOrderItem.size() - 1));
         return sb.toString();
     }
 
     @Override
     public String toJsonString() {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>(2);
         result.put("msgtype", "markdown");
 
-        Map<String, Object> markdown = new HashMap<String, Object>();
+        Map<String, Object> markdown = new HashMap<>(16);
         markdown.put("title", title);
 
-        StringBuffer markdownText = new StringBuffer();
+        StringBuilder markdownText = new StringBuilder();
         for (String item : items) {
-            markdownText.append(item + "\n");
+            markdownText.append(item).append("\n");
         }
         markdown.put("text", markdownText.toString());
         result.put("markdown", markdown);
