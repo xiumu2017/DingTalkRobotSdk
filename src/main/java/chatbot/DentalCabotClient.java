@@ -123,17 +123,6 @@ public class DentalCabotClient {
         return url + "&timestamp=" + timestamp + "&sign=" + sign;
     }
 
-    /**
-     * 测试 main 方法
-     *
-     * @param args 命令行参数
-     */
-    public static void main(String[] args) {
-//        https://oapi.dingtalk.com/robot/send?access_token=6e165a35ab053b64d095b93f5eed225fb0b37986e0034a083381b92da143035a
-        SendResult result = DentalCabotClient.send("6e165a35ab053b64d095b93f5eed225fb0b37986e0034a083381b92da143035a",
-                new TextMessage("你好~😄"), "SECdbff08950c3eb19c5f8de1a9cdf2b76c4970d82db7e25d79d82cc33e82ae0578");
-        System.out.println(result.toString());
-    }
 }
 
 
