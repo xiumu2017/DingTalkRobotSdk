@@ -23,7 +23,6 @@ public class MarkdownMessage implements Message {
 
     private final List<String> items = new ArrayList<>();
 
-
     public void add(String text) {
         items.add(text);
     }

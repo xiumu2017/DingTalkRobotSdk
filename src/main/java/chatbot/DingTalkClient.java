@@ -1,7 +1,6 @@
 package chatbot;
 
 import chatbot.message.Message;
-import chatbot.message.TextMessage;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -21,12 +20,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 /**
  * @author dzhang
  */
-public class DentalCabotClient {
+public class DingTalkClient {
 
     private final static HttpClient HTTPCLIENT = HttpClients.createDefault();
 
@@ -48,12 +46,6 @@ public class DentalCabotClient {
             sendResult.setSuccess(errCode.equals(0));
         }
         return sendResult;
-    }
-
-    public static void send(List<String> tokens, Message message) {
-        for (String token : tokens) {
-            send(token, message);
-        }
     }
 
     public static SendResult send(String token, Message message, String secret) {
@@ -93,7 +85,7 @@ public class DentalCabotClient {
      * @param timestamp 时间戳
      * @param secret    密钥
      */
-    public static String sign(Long timestamp, String secret) {
+    private static String sign(Long timestamp, String secret) {
         String stringToSign = timestamp + "\n" + secret;
         Mac mac;
         try {
